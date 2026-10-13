@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ProBall Arena</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/img/icon.png">
+<link rel="apple-touch-icon" href="/img/icon.png">
+<meta property="og:title" content="ProBall Arena">
+<meta property="og:description" content="Gel, birlikte oynayalım! Come play with me.">
+<meta property="og:image" content="https://proballarena.com/img/lobby.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Teko:wght@500;600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root { --night: #070b1f; --ink: #f2f4ff; --muted: #aab3d6; --gold: #ffc93c; --line: rgba(255,255,255,0.12); }
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; background: var(--night) url("/img/stadium.jpg") center / cover no-repeat; color: var(--ink); font: 16px/1.6 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; display: flex; align-items: center; justify-content: center; padding: 24px 16px; }
+body::before { content: ""; position: fixed; inset: 0; background: linear-gradient(180deg, rgba(7,11,31,0.55), rgba(7,11,31,0.92)); z-index: -1; }
+.card { width: min(440px, 100%); background: rgba(14, 22, 64, 0.88); border: 1px solid var(--line); border-radius: 22px; padding: 28px 22px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+.card img.icon { width: 84px; height: 84px; border-radius: 20px; margin: 0 auto 12px; display: block; }
+h1 { font-family: Teko, Impact, sans-serif; text-transform: uppercase; font-size: 40px; line-height: 1; margin: 0 0 8px; }
+p { color: var(--muted); margin: 8px 0; }
+.code { font-family: Teko, Impact, sans-serif; font-size: 52px; letter-spacing: 0.12em; color: var(--gold); margin: 10px 0 4px; }
+.btn { display: block; margin: 14px auto 0; padding: 13px 18px; border-radius: 14px; border: 0; width: 100%; font-family: Teko, sans-serif; font-size: 26px; text-transform: uppercase; color: #fff; text-decoration: none; background: linear-gradient(180deg, #ff5566, #d81f35); box-shadow: 0 6px 0 #7a0f1d; cursor: pointer; }
+.btn.ghost { background: transparent; border: 1px solid var(--line); box-shadow: none; font-size: 22px; }
+.small { font-size: 13px; }
+</style>
+</head>
+<body>
+<main class="card" id="card">
+  <img class="icon" src="/img/icon.png" alt="ProBall Arena">
+  <h1 id="title">ProBall Arena</h1>
+  <p id="lede"></p>
+  <div class="code" id="code" hidden></div>
+  <a class="btn" id="open" href="/">ProBall Arena</a>
+  <button class="btn ghost" id="copy" hidden></button>
+  <p class="small" id="note"></p>
+</main>
+<script>
+(function () {
+  var tr = (navigator.language || "").toLowerCase().indexOf("tr") === 0;
+  var t = tr ? {
+    invite: "Seni oyuna davet ettiler!", room: "Seni bir maça çağırıyorlar!", profile: "ProBall Arena oyuncusu",
+    lede: "ProBall Arena: hızlı, rekabetçi online futbol.", open: "Oyunu aç", copy: "Kodu kopyala", copied: "Kopyalandı",
+    note: "Oyun yüklü değilse: indirdikten sonra bu kodu Profil > Davet ekranına gir; ikiniz de 200 Coin kazanın.",
+    missing: "Sayfa bulunamadı.", home: "Ana sayfa"
+  } : {
+    invite: "You're invited!", room: "You're called to a match!", profile: "ProBall Arena player",
+    lede: "ProBall Arena: fast, competitive online football.", open: "Open the game", copy: "Copy code", copied: "Copied",
+    note: "No game yet? Install it, then enter this code in Profile > Invite; you both get 200 Coins.",
+    missing: "Page not found.", home: "Home"
+  };
+  var parts = location.pathname.split("/").filter(Boolean);
+  var kind = parts[0], value = (parts[1] || "").toUpperCase().replace(/[^A-Z0-9-]/g, "").slice(0, 32);
+  var el = function (id) { return document.getElementById(id); };
+  if (["i", "r", "p"].indexOf(kind) < 0 || !value) {
+    el("title").textContent = "404"; el("lede").textContent = t.missing; el("open").textContent = t.home; return;
+  }
+  el("title").textContent = kind === "i" ? t.invite : (kind === "r" ? t.room : t.profile);
+  el("lede").textContent = t.lede;
+  el("open").textContent = t.open;
+  el("open").href = "proball://" + kind + "/" + encodeURIComponent(value);
+  if (kind === "i") {
+    el("code").hidden = false; el("code").textContent = value;
+    el("copy").hidden = false; el("copy").textContent = t.copy;
+    el("copy").onclick = function () {
+      if (navigator.clipboard) { navigator.clipboard.writeText(value).then(function () { el("copy").textContent = t.copied; }); }
+    };
+    el("note").textContent = t.note;
+  }
+})();
+</script>
+</body>
+</html>

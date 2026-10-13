@@ -1,0 +1,14 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["54WJHHTYKA.com.kaankureli.proballarena"],
+        "components": [
+          { "/": "/i/*", "comment": "player invite and referral code" },
+          { "/": "/r/*", "comment": "Custom Room" },
+          { "/": "/p/*", "comment": "player profile" }
+        ]
+      }
+    ]
+  }
+}
