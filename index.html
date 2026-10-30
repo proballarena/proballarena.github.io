@@ -65,6 +65,7 @@ section { padding: 72px 0; }
 h2 { font-size: clamp(38px, 6vw, 58px); margin: 4px 0 18px; }
 .sub { color: var(--muted); max-width: 640px; margin: 0 0 36px; }
 
+.shot video { display: block; width: 100%; height: auto; aspect-ratio: 1280 / 590; background: #050b1a; }
 .shot { border-radius: 22px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55), 0 0 0 6px rgba(255, 201, 60, 0.12); }
 
 .features { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 40px; }
@@ -129,7 +130,7 @@ footer a:hover { color: var(--gold); }
     <div class="kicker"><span class="tr">Oyun</span><span class="en">The game</span></div>
     <h2><span class="tr">Stadyum seni bekliyor</span><span class="en">The stadium awaits</span></h2>
     <p class="sub"><span class="tr">Tek dokunuşla maça gir. Her maç birkaç dakika sürer, her gol fark yaratır.</span><span class="en">Jump into a match with one tap. Every match takes a few minutes, and every goal counts.</span></p>
-    <div class="shot"><img src="img/lobby.jpg" alt="ProBall Arena lobby" loading="lazy"></div>
+    <div class="shot"><video src="media/promo.mp4" poster="img/promo-poster.jpg" controls playsinline preload="none" aria-label="ProBall Arena gameplay video"></video></div>
     <div class="features">
       <div class="card"><div class="icon">⚡</div><h3><span class="tr">Hızlı maçlar</span><span class="en">Quick matches</span></h3><p><span class="tr">Joystick ve şut tuşu: öğrenmesi kolay, ustalaşması zor.</span><span class="en">A joystick and a kick button: easy to learn, hard to master.</span></p></div>
       <div class="card"><div class="icon">🏆</div><h3><span class="tr">Sıralamalı lig</span><span class="en">Ranked ladder</span></h3><p><span class="tr">Ligde basamak basamak yüksel, hafta sonu kupasında yarış.</span><span class="en">Climb the ranked tiers and compete in the weekend cup.</span></p></div>
